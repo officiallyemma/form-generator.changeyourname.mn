@@ -422,3 +422,7 @@ md-outlined-text-field {
 body:not(.loading) .loader {
     opacity: 0;
 }
+
+.counter-card {
+    text-align: center;
+}

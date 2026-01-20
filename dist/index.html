@@ -61,8 +61,8 @@
         }
       }
     </script>
-  <script type="module" crossorigin src="/assets/index-CYxdVKAt.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BcVi29QI.css">
+  <script type="module" crossorigin src="/assets/index-3GkAd6ss.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B633rsw-.css">
 </head>
 
 <body class="loading">
@@ -283,6 +283,12 @@
                             Download NAM107 - Proposed Order Granting Name Change
                         </md-filled-button>
                     </div>
+
+
+                    <div class="sub-card counter-card">
+                        <p>0 forms generated this year</p>
+                    </div>
+
                 </div>
             </div>
 
@@ -304,7 +310,7 @@
 
                     <p>The PDF's are still editable (on iOS you need the Adobe Acrobat Reader app) until you click
                         print and export as a PDF again. Submitting the editable versions may cause issues with
-                        submitting online.</p>
+                        the online court system. Make sure to export the final versions before submitting.</p>
                 </div>
             </div>
         </div>
@@ -329,7 +335,7 @@
 
             <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener">Name Change Form
                 Generator</a>
-            &copy; 2025 by
+            &copy; 2026 by
             <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
             is licensed under
             <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+.</a>
@@ -342,6 +348,16 @@
             document.fonts.ready.then(() => {
                 document.body.classList.remove('loading');
             });
+
+            fetch('/counter')
+                .then(response => response.text())
+                .then(data => {
+                    const counterCard = document.querySelector('.counter-card p');
+                    counterCard.textContent = `${data} forms generated this year`;
+                })
+                .catch(error => {
+                    console.error('Error fetching counter:', error);
+                });
 
         })
         // Pre-fill the date picker to get it to render properly on mobile

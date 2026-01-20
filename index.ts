@@ -4,7 +4,45 @@ const app = express();
 import bodyParser from 'body-parser';
 import pdfFillForm from 'pdf-fill-form';
 import fetch from 'node-fetch';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 // const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
+// load counter data from file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const COUNTER_FILE = path.resolve(__dirname, 'counter.txt');
+
+let counter = 0;
+try {
+    const raw = fs.readFileSync(COUNTER_FILE, 'utf8').trim();
+    const parsed = parseInt(raw, 10);
+    if (!Number.isNaN(parsed)) {
+        counter = parsed;
+    } else {
+        console.warn('counter.txt does not contain a valid number; defaulting to 0');
+    }
+} catch (err) {
+    const e = err as NodeJS.ErrnoException;
+    if (e && e.code === 'ENOENT') {
+        console.warn('counter.txt not found; starting counter at 0');
+    } else {
+        console.error('Error reading counter.txt:', err);
+    }
+}
+
+function saveCounter() {
+    try {
+        fs.writeFileSync(COUNTER_FILE, String(counter), 'utf8');
+    } catch (err) {
+        console.error('Failed to write counter.txt:', err);
+    }
+}
+
+
+
+
 
 app.use(bodyParser.urlencoded())
 
@@ -238,6 +276,11 @@ function validateManifest() {
     })
 }
 
+
+app.get('/counter', (req, res) => {
+    res.send(counter);
+});
+
 if (process.env.RECAPTCHA_SECRET === undefined) {
     console.warn("[Fatal] RECAPTCHA_SECRET environment variable is not set.");
     process.exit(1)
@@ -268,6 +311,11 @@ manifest.forEach((item) => {
                     }
                 }
                 // if all is well, generate the PDF
+
+                // analytics (no PII)
+                counter += 1;
+                saveCounter();
+                console.log(`[${new Date().toISOString()}] Generated ${item.name} (total generated: ${counter})`);
 
                 var pdf = pdfFillForm.writeSync('dist/' + item.name, fields, { "save": "pdf" });
 
