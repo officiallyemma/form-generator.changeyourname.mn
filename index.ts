@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 // load counter data from file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const COUNTER_FILE = path.resolve(__dirname, 'counter.txt');
+const COUNTER_FILE = path.resolve(__dirname, '..', 'counter.txt');
 
 let counter = 0;
 try {
