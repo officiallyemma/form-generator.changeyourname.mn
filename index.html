@@ -349,7 +349,15 @@
     <script>
 
         document.addEventListener('DOMContentLoaded', () => {
-            gtag('config', 'AW-18033381211');
+            // Wait for gtag to be available before calling config
+            function waitForGtag() {
+                if (typeof gtag === 'function') {
+                    gtag('config', 'AW-18033381211');
+                } else {
+                    setTimeout(waitForGtag, 50);
+                }
+            }
+            waitForGtag();
 
             document.fonts.ready.then(() => {
                 document.body.classList.remove('loading');
