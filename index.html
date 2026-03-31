@@ -53,7 +53,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
         <link
             rel="preload"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=arrow_back,badge,contact_mail,description,download,fact_check,gavel,help,person,security,signature,wc"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=arrow_back,badge,contact_mail,description,download,fact_check,gavel,help,person,security,send,signature,wc"
             as="style"
             onload="this.onload=null;this.rel='stylesheet'"
         >
@@ -103,7 +103,11 @@
                 <a href="https://changeyourname.mn" class="back-button" aria-label="Return to main guide">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </a>
-                <h1 class="headline">Form Generator - NOT AFFILIATED WITH ANY GOVERNMENT OR LEGAL ENTITY</h1>
+                <h1 class="headline">Trans Name Change Court Document Generator</h1>
+                <p>
+                    Unofficial and not affiliated with the government in any way. Double-check with
+                    <a href="https://mncourts.gov/help-topics/name-change" target="_blank">official resources</a>
+                </p>
             </div>
         </div>
     </div>
@@ -111,10 +115,11 @@
         <!-- Header Card -->
         <div class="card header-card">
             <img src="banner.webp" height="200" alt="Name Change Form Generator">
-            <h1>Name and Gender Change Form Generator - NOT AFFILIATED WITH ANY GOVERNMENT OR LEGAL ENTITY<</h1>
+            <h1>Trans Name Change Court Document Generator</h1>
+            <!-- <h2>"Deadname Deleter"</h2> -->
             <p class="body-text">
-                Generate the required legal forms for your name and gender marker change in Minnesota,
-                includes NAM102, NAM103, and NAM107.
+                Easily prefill and download the required legal forms for your name and gender marker change in Minnesota,
+                includes forms NAM102, NAM103, and NAM107.
                 <br>
                 <br>
                 This form makes a number of assumptions in order to "just work" for
@@ -126,9 +131,9 @@
             <div class="sub-card sub-card--info">
                 <p>
                     <strong>Security Notice:</strong>
-                    Your information is encrypted and is not saved or logged on the
+                    Your information is encrypted in transit and is not saved or logged on the
                     server. This app is
-                    <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank" rel="noopener">open source</a>
+                    <a href="https://github.com/officiallyemma/form-generator.changeyourname.mn" target="_blank" rel="noopener">open source</a>
                     . Security audits are welcome.
                 </p>
             </div>
@@ -269,9 +274,9 @@
                 <div class="section-content">
                     <div class="sub-card sub-card--highlight">
                         <p>
-                            <strong>Ready to download:</strong>
-                            Click each button below to generate your completed forms.
-                            Make sure all information above is correct before downloading.
+                            <!-- <strong>Ready to download:</strong> -->
+                            Click each button below to sign and download your completed forms.
+                            Make sure all information above is correct before proceeding.
                         </p>
                     </div>
                     <div class="button-group">
@@ -304,19 +309,23 @@
                         <p>
                             <strong>Important Disclaimer:</strong>
                             You are responsible for checking the validity of the
-                            information in these forms. I am not a lawyer, and the software I wrote definitely isn't one
-                            either.
+                            information in these forms prior to submitting to the courts.
+                            <b>I am not a lawyer, and the software I wrote definitely isn't one either.</b>
                         </p>
                     </div>
                     <p>
-                        If you are married, divorced, have children, a criminal history, own land, or are cisgender,
-                        you'll need to manually update information on these forms after downloading.
+                        This form generator is not affiliated with any government or advocacy organization. You will need to submit these forms to
+                        <a href="https://mncourts.gov/help-topics/name-change" target="_blank">the government</a>
+                        in order to apply for a name change.
                     </p>
                     <p>
-                        The PDF's are still editable (on iOS you need the Adobe Acrobat Reader app) until you click
-                        print and export as a PDF again. Submitting the editable versions may cause issues with
-                        the online court system. Make sure to export the final versions before submitting.
+                        The PDFs are still editable until you click
+                        print and export as a PDF again (on iOS you need the Adobe Acrobat Reader app). Submitting the editable versions may cause issues with the online court system. Make sure to export the final versions before submitting.
                     </p>
+                    <md-filled-button id="returnToGuide" href="https://changeyourname.mn">
+                        <span class="material-symbols-outlined" slot="icon">send</span>
+                        Instructions to file these forms with the courts
+                    </md-filled-button>
                 </div>
             </div>
         </div>
