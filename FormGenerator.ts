@@ -6,6 +6,10 @@ import 'dotenv/config'                              // load env vars from .env f
 import express from "express";                      // host a webserver
 import bodyParser from 'body-parser';               // parse incoming form data
 
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 export type Manifest = {
     name: string,
     version: string,
@@ -44,7 +48,7 @@ class FormGenerator {
     // load the manifest file, killing the process if it can't be found or loaded
     loadManifest() {
         return new Promise<void>((resolve, reject) => {
-            const localManifestPath = path.resolve(import.meta.dirname, '.', 'manifest.js');
+            const localManifestPath = path.resolve(__dirname, '.', 'manifest.js');
             const systemManifestPath = path.resolve('/etc/deadname-deleter', 'manifest.js');
             // prefer system level manifest if it exists
             const manifestPath = fs.existsSync(systemManifestPath) ? systemManifestPath : localManifestPath;
