@@ -225,7 +225,6 @@ class FormGenerator {
                 })
                     .then((response: any) => response.json())
                     .then((data: { success: boolean, score: number, hostname: string }) => {
-                        console.log(data)
                         if (data.hostname !== 'localhost' && !process.env.SKIP_RECAPTCHA) {
                             if (!data.success) {
                                 return res.status(400).send('Recaptcha verification failed.');
