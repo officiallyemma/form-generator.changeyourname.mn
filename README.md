@@ -1,152 +1,134 @@
-# form-generator.changeyourname.mn
-A website that automatically generates the forms required to change your name in Minnesota
+# Deadname Deleter
 
-Simply enter your information into the website and click the links to generate your forms.
+### Live at: form-generator.ChangeYourName.MN
 
------
+#### Purpose:
+This Node.js server helps Trans people in Minnesota generate legal name change PDFs-- Although the software is easily adaptable to many PDF generation tasks. Users fill out a web form, which maps to PDF templates defined in a manifest. PDFs are generated in memory and returned to the user. No data is stored or logged.
 
-# Installation
+#### Key Features
 
-This project requires [pdf-fill-form](https://www.npmjs.com/package/pdf-fill-form). Windows is not supported. First, install dependencies.
+| Feature | Description |
+|---------|-------------|
+| **PDF Generation** | Dynamically fills PDF templates based on user input. |
+| **No Data Retention** | PDFs processed in memory; nothing stored permanently. |
+| **Manifest-Driven** | All PDFs and field mappings defined in a manifest (`manifest.js`). |
+| **Custom Build Functions** | Map user input to PDF fields using Javascript expressions. |
+| **Multiple Documents** | Supports multiple PDFs with independent mappings. |
+| **Recaptcha Verification** | Optional Google reCAPTCHA v3 to protect form submissions. |
+| **Analytics** | Tracks total generated PDFs. This is the only logging. |
+| **Manifest Validation** | Checks manifest completeness, PDF field matches, and build function output. |
+| **Test PDF Generation** | Generates temporary PDFs and JSON for manual inspection in `/tmp`. |
+| **Safer Manifest Import** | Limits accidental Node API access with `saferImport`. |
+| **Error Handling** | Validator errors halt startup; Recaptcha and input checks protect endpoints. |
 
-`sudo apt-get install libcairo2-dev libpoppler-qt5-dev poppler-data`
+#### Installation
+Install OS dependencies (Linux only!! No Windows support):
 
-`npm i`
-
-Then you can run the server
-
-`node index.js`
-
-or use pm2 to keep it alive
-
-`pm2 start index.js`
-
-# Usage
-
-By default, the server will run on port `:4747`. It will serve static HTML and handle PDF POST requests as defined by the manifest. If you're running multiple websites on the server, you can use nginx to proxy this to port 80/443 like so.
-
+```Bash
+sudo apt-get install libcairo2-dev libpoppler-qt5-dev poppler-data
 ```
-server {
-    server_name form-generator.changeyourname.mn www.form-generator.changeyourname.mn;
-
-    root /var/www/form-generator.changeyourname.mn;
-    index index.html;
-
-    location / {
-        proxy_pass http://localhost:4747;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-    }
-
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/form-generator.changeyourname.mn/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/form-generator.changeyourname.mn/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
-}
-server {
-    listen 80;
-    server_name form-generator.changeyourname.mn www.form-generator.changeyourname.mn;
-    return 301 https://$host$request_uri;
-
-}
+Install Node dependencies:
+```Bash
+npm i
 ```
+Start the server:
+```Bash
+node FormGenerator.js
+```
+Environment variables:
 
-# Editing or Adding New Forms
+- `PORT` – change default port 4747
+- `RECAPTCHA_SECRET` – required reCAPTCHA secret for production
+- `SKIP_RECAPTCHA=true` – skip reCAPTCHA for testing
 
-Heres a brief overview of how pdf.js functions.
+#### Adding or Editing Forms
 
-First we define our input as a key-value store
+## 1. Create PDFs with fillable fields
 
-```Javascript
+Using LibreOffice Draw: (you can also use Adobe Acrobat or other PDF editors, but LibreOffice is free and open source):
+
+- Open PDF in LibreOffice Draw
+- Enable Form Toolbars:
+  - View > Toolbars > Form Controls
+  - View > Toolbars > Form Design
+- Turn on Design Mode
+- Add Text Boxes or Checkboxes
+- Name each field (Right Click > Control Properties > Name)
+- Export as PDF with "Create PDF Form" checked
+
+
+
+## 2. Define User Input
+
+Input is a key-value store, for example:
+
+```JSON
 {
     currentFirstName: "John",
-    currentMiddleName: "A",
     currentLastName: "Doe",
-    newFirstName: "Jane",
-    newMiddleName: "B",
-    newLastName: "Smith",
-    dateOfBirth: "1990-01-01",
-    race: "White",
-    sexOnBirthRecords: "Male",
-    newSex: "Female",
-    address: "123 Main St",
-    city: "Minneapolis",
-    state: "Minnesota",
-    zip: "12345",
-    county: "Hennepin",
-    phone: "123-456-7890",
-    email: "asd@example.com",
-    legallyBindingSignature: "John Doe"
+    address: "123 Main St, Anytown, MN",
+    children: 2
+}
+```
+
+
+## 3. Define Manifest
+
+Manifest:
+```TS
+type Manifest = {
+    name: string,
+    version: string,
+    documents: {
+        path: string,
+        name: string,
+        pdfFields: { [key: string]: 'text' | 'checkbox' },
+        inputFields: string[],
+        build: (data: any) => { [key: string]: string | boolean }
+    }[]
+}
+```
+
+Place this file in the root project directory as `manifest.js` or in `/etc/form-generator/manifest.js`.
+
+```TS
+module.exports = {
+    "name": "Example Manifest",
+    "version": "1.0",
+    "documents": [
+        {
+            // define PDF template location and name
+            "path": "./dist",
+            "name": "example.pdf",
+            // define fields that exist in the PDF, as well as their types
+            "pdfFields": {
+                "fullName": "text",
+                "address": "text",
+                "hasChildren": "checkbox"
+            },
+            // define which user input fields are needed to build the PDF fields
+            "inputFields": ["currentFirstName", "currentLastName", "children"],
+            // map user input to PDF fields using a JavaScript function. This is where you can do any necessary data transformation or formatting.
+            "build": (data) => ({
+                // we use a template string here to combine first and last name into a single fullName field for the PDF
+                fullName: `${data.currentFirstName} ${data.currentLastName}`,
+                // we can pass address directly since it doesn't need transformation
+                address: data.address,
+                // we dynamically generate a boolean value for the hasChildren checkbox based on whether the user input for children is greater than 0
+                hasChildren: data.children > 0
+            })
+        }
+    ]
 }
 
-```
-
-Then we define a manifest of PDF files containing their fields and a function describing how to fill out those fields given the input.
-```Javascript
-const manifest = [
-
-    {
-        // the file we read from
-        name: '/path/to/file.pdf',
-        // a list of fields contained in the PDF
-        fields: {
-            fullName: TYPES.TEXT,
-            address: TYPES.TEXT,
-            hasChildren: TYPES.CHECKBOX
-        },
-        // a function that maps the input from website to fields
-        build: (data) => {
-            fullName: data.firstName + ' ' + data.lastName,
-            address: data.address,
-            hasChildren: data.children > 0
-        }
-    }
-
-]
-
-
 
 ```
 
-On startup, the server will validate all PDFs in the manifest. This includes checking the fields against the manifest and checking the build function for errors. This will catch most simple configuration errors during testing.
+The server will then serve autofilled pdf's when a recaptcha verified POST request is made to `/example.pdf` with the appropriate input fields.
 
--------
 
-How do I add or edit a form?
+#### Validator
+On startup, the server validates PDF files and their fields against the manifest. Any errors in mapping or missing fields should be caught.
 
-https://youtu.be/FvXLREVgaH0
-
-**Add Forms to the PDf using LibreOffice Draw**
-
-You could do this in Acrobat, but Adobe can [removed for professionalism]
-
-Download and install LibreOffice Draw
-
-Open the PDF you wish to edit
-
-View > Toolbars > Form Controls
-
-View > Toolbars > Form Design
-
-Ensure Design mode is turned on (icon of a measuring square)
-
-Click Text Box or Checkbox and place it into the document
-
-Give the field a name: Right Click > Control Properties > Name
-
-Repeat for all fields
-
-File > Export as > Export as PDF
-
-Make sure "create PDF form" is checked
-
-**Add PDF to manifest**
-
-Create a new manifest entry using the existing code as an example. The validator should help you with any simple misconfigurations.
-
-**pdf.js will automatically start serving content based on the manifest**
+#### Runtime watchdog
+Manifests are prevented from accessing console, file system, network, or other Node APIs. If a manifest tries to do anything sketchy, the server shuts down. This is not designed to protect you from bad actors, but rather to prevent you from accidentally shooting yourself in the foot and logging/saving user data.
