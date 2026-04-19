@@ -1,9 +1,9 @@
 
-import '@material/web/button/filled-button.js';
-import '@material/web/textfield/outlined-text-field.js';
-import '@material/web/select/outlined-select.js';
-import '@material/web/select/select-option.js';
-import '@material/web/iconbutton/icon-button.js';
+import('@material/web/button/filled-button.js');
+import('@material/web/textfield/outlined-text-field.js');
+import('@material/web/select/outlined-select.js');
+import('@material/web/select/select-option.js');
+import('@material/web/iconbutton/icon-button.js');
 
 import { PDFDocument } from 'pdf-lib';
 
@@ -150,7 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 } catch (e) {
                     console.error(`Error filling PDF form: ${e}`);
                     alert('An error occurred while filling the PDF form. Most likely a "me problem" not a "you problem". Sorry! Please try again later or email me if the problem persists.');
+                    return;
                 }
+
+                fetch('/increment', { method: 'POST' }).catch(err => {
+                    console.error('Failed to increment counter:', err);
+                });
 
                 // Serialize the PDFDocument to bytes (a Uint8Array)
                 const pdfBytes = await pdfDoc.save();
