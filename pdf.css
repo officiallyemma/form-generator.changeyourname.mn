@@ -49,6 +49,14 @@
     --md-sys-color-surface-container: rgb(241 237 234);
     --md-sys-color-surface-container-high: rgb(236 231 229);
     --md-sys-color-surface-container-highest: rgb(230 226 223);
+    /* 
+    --md-ref-typeface-brand: 'Roboto';
+    --md-ref-typeface-plain: 'Roboto'; */
+
+    --md-filled-text-field-input-text-font: 'Roboto';
+    /* --md-sys-typescale-body-large-font: 'Roboto'; */
+    --md-filled-text-field-label-text-font: 'Roboto';
+    /* --md-sys-typescale-body-large-font: 'Roboto'; */
 }
 
 /* Base styles */
@@ -175,7 +183,7 @@ body {
 
 .header-card img {
     width: 100%;
-    height: auto;
+    height: 100px;
     max-height: 200px;
     /* object-fit: cover; */
     border-radius: 8px;
@@ -444,4 +452,14 @@ body:not(.loading) .loader {
 
 .counter-card {
     text-align: center;
+}
+
+
+a:hover {
+    background-color: #7cbdff29;
+
+}
+
+a:visited {
+    color: var(--md-sys-color-secondary);
 }
