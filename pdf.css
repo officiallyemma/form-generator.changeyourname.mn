@@ -59,9 +59,19 @@
     /* --md-sys-typescale-body-large-font: 'Roboto'; */
 }
 
+@font-face {
+    font-family: 'Atkinson Hyperlegible Soft';
+    src: url('public/AtkinsonHyperlegibleSoft-Regular.ttf');
+}
+
+:root, body{
+    --mdc-typography-font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
+}
+
+
 /* Base styles */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(270deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a);

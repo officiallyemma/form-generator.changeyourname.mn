@@ -1,4 +1,4 @@
-import { PDFForm } from "pdf-lib";
+import { PDFDocument, PDFForm } from "pdf-lib";
 
 export interface FormGeneratorConfig {
     name: string;
@@ -6,7 +6,7 @@ export interface FormGeneratorConfig {
     form: (FormSectionConfig | CommentConfig)[]
     documents: DocumentConfig[];
     onload?: () => void;
-    onGenerate?: (form: PDFForm) => void;
+    onGenerate?: (form: PDFDocument) => void;
 }
 
 export interface CommentConfig {

@@ -20,16 +20,14 @@
   "homepage": "https://github.com/officiallyemma/form-generator.changeyourname.mn#readme",
   "dependencies": {
     "@material/web": "^2.4.0",
-    "@types/grecaptcha": "^3.0.9",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "node-fetch": "^3.3.2",
-    "pdf-fill-form": "^5.1.0",
     "pdf-lib": "^1.17.1"
   },
   "devDependencies": {
     "@types/node": "^24.6.2",
     "typescript": "^5.9.3",
-    "vite": "^7.3.1"
+    "vite": "^7.3.3"
   }
 }

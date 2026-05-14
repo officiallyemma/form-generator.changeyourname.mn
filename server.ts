@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 let counter = -1;
-const COUNTER_FILE = path.resolve(process.env.HOME + '/.local/share/form-generator', 'counter.txt');
+const COUNTER_FILE = path.resolve(process.env.HOME ?? '.' + '/.local/share/form-generator', 'counter.txt');
 
 
 function saveCounter() {

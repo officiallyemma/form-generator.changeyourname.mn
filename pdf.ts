@@ -1,41 +1,12 @@
 
-import('@material/web/button/filled-button.js');
-import('@material/web/textfield/outlined-text-field.js');
-import('@material/web/select/outlined-select.js');
-import('@material/web/select/select-option.js');
-import('@material/web/iconbutton/icon-button.js');
-
 import { PDFDocument } from 'pdf-lib';
 
+async function load() {
+    return await import(/* @vite-ignore */`./${window.location.pathname.split('/').slice(-1)[0] || 'Minnesota'}.ts`)
+}
 
-import Config from './FormGeneratorConfig'
-import { MdOutlinedField } from '@material/web/field/outlined-field';
-
-// generate form from config
-//  <div class="card guide-section" id="current-identity">
-//                 <div class="section-header">
-//                     <span class="material-symbols-outlined section-icon">person</span>
-//                     <h2>1. Current Legal Name</h2>
-//                 </div>
-//                 <div class="section-content">
-//                     <div class="form-grid">
-//                         <md-outlined-text-field id="currentFirstName" label="Current Legal First Name"
-//                             supporting-text="As shown on official documents"></md-outlined-text-field>
-//                         <md-outlined-text-field id="currentMiddleName" label="Current Legal Middle Name"
-//                             supporting-text="Leave blank if none"></md-outlined-text-field>
-//                         <md-outlined-text-field id="currentLastName" label="Current Legal Last Name"
-//                             supporting-text="As shown on official documents"></md-outlined-text-field>
-//                         <md-outlined-text-field id="dateOfBirth" label="Date of Birth"
-//                             type="date"></md-outlined-text-field>
-//                         <md-outlined-text-field id="race" label="Race" type="text"
-//                             supporting-text="Race for NAM103"></md-outlined-text-field>
-//                     </div>
-//                 </div>
-//             </div>
-
-
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    let Config = (await load()).default;
     document.fonts.ready.then(async () => {
         // wait for md custom elements to be defined before we render form elements
         await customElements.whenDefined('md-outlined-select');
@@ -58,10 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
             ${section.fields.map(field => {
                 return field.type === 'select' ?
                     `<md-outlined-select id="${field.id}" label="${field.label}" supporting-text="${field.supportingText}" autocomplete="off" serialize>
-                                        <md-select-option aria-label="blank"></md-select-option> 
-                                            ${field.options.map(option => `<md-select-option value="${option.value}">${option.label}</md-select-option>`).join('')}
-                                        </md-outlined-select>` :
-                    `<md-outlined-text-field id="${field.id}" label="${field.label}" type="${field.type}" supporting-text="${field.supportingText}" autocomplete="off" serialize></md-outlined-text-field>`
+                        <md-select-option aria-label="blank"></md-select-option> 
+                            ${field.options.map(option => `<md-select-option value="${option.value}">${option.label}
+                        </md-select-option>`).join('')}
+                    </md-outlined-select>`
+                    : `<md-outlined-text-field id="${field.id}" label="${field.label}" type="${field.type}" supporting-text="${field.supportingText}" autocomplete="off" serialize></md-outlined-text-field>`
             }).join('')}
                         </div>
                     </div>
@@ -78,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        async function getCounter() {
+            let counterValue = await (await fetch("/counter")).text();
+            return counterValue?.length >= 100 ? NaN : counterValue ?? NaN;
+        }
 
         // render document buttons
         document.querySelector('#materialForm').insertAdjacentHTML('beforeend', `
@@ -103,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('')}
                 </div>
                 <div class="sub-card counter-card">
-                        <p>${await (await fetch("/counter")).text() ?? NaN} forms generated since 2025</p>
+                        <p>${await getCounter()} forms generated since 2025</p>
                     </div>
 
             </div>
@@ -121,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let pdfFields = doc.build(data);
 
                 // Fetch the PDF with form fields
+                // TODO: do this on page load so user can turn on airplane mode while generating PDFs as a form of security theatre /shrug
                 const formUrl = `${doc.path}${doc.name}`;
                 const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
 
@@ -144,12 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     })
 
-                    // pass form object to Config for additional custom PDF manipulation
-                    Config.onGenerate(form);
+                    // pass  object to Config for additional custom PDF manipulation
+                    Config.onGenerate(pdfDoc);
 
                 } catch (e) {
                     console.error(`Error filling PDF form: ${e}`);
-                    alert('An error occurred while filling the PDF form. Most likely a "me problem" not a "you problem". Sorry! Please try again later or email me if the problem persists.');
+                    alert('An error occurred while generating the PDF form. Sorry! Please try again later or email me (emma@zimbin.ski) if the problem persists.');
                     return;
                 }
 

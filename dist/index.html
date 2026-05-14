@@ -1,169 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="sienna.min.js" defer></script>
-    <!-- <script defer
-        src="https://www.google.com/recaptcha/api.js?render=6LcgsXkrAAAAAOZ8g7jVWWZssZ6PUcfdltyyiiwy"></script> -->
-    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
     <title>Legal Name and Gender Change Form Generator</title>
-    <meta name="description"
-        content="Generate NAM102, NAM103, and NAM107 forms for changing your legal name and gender in Minnesota. Secure, open-source form generator for Minnesota name change process.">
-    <meta property="og:title" content="Minnesota Name and Gender Change Form Generator">
-    <meta property="og:description"
-        content="Generate the required forms (NAM102, NAM103, NAM107) for legally changing your name and gender in Minnesota. Secure and easy to use.">
-    <meta property="og:url" content="https://changeyourname.mn/form-generator">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="banner.webp">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Minnesota Name and Gender Change Form Generator">
-    <meta name="twitter:description"
-        content="Generate required forms for legally changing your name and gender in Minnesota. NAM102, NAM103, and NAM107 forms.">
-    <meta name="twitter:image" content="images/banner.webp">
+    <meta
+      name="description"
+      content="Generate NAM102, NAM103, and NAM107 forms for changing your legal name and gender in Minnesota. Secure, open-source form generator for Minnesota name change process."
+    />
+    <meta property="og:title" content="Minnesota Name and Gender Change Form Generator" />
+    <meta property="og:description" content="Generate the required forms (NAM102, NAM103, NAM107) for legally changing your name and gender in Minnesota. Secure and easy to use." />
+    <meta property="og:url" content="https://form-generator.changeyourname.mn/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="banner.webp" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Minnesota Name and Gender Change Form Generator" />
+    <meta name="twitter:description" content="Generate required forms for legally changing your name and gender in Minnesota. NAM102, NAM103, and NAM107 forms." />
+    <meta name="twitter:image" content="/banner.webp" />
     <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "name": "Name and Gender Change Form Generator",
-          "description": "Generate NAM102, NAM103, and NAM107 forms for changing your legal name in Minnesota.",
-          "url": "https://changeyourname.mn/form-generator",
-          "applicationCategory": "LegalService",
-          "operatingSystem": "All",
-          "author": {
-            "@type": "Person",
-            "name": "Emma Zimbinski",
-            "url": "https://zimbin.ski"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "changeyourname.mn"
-          },
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          }
-        }
-        </script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
-    <link rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=arrow_back,badge,contact_mail,description,download,fact_check,gavel,help,person,security,send,signature,wc"
-        as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <!-- -->
- <script type="importmap">
       {
-        "imports": {
-          "@material/web/": "https://esm.run/@material/web/"
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Name and Gender Change Form Generator",
+        "description": "Generate NAM102, NAM103, and NAM107 forms for changing your legal name in Minnesota.",
+        "url": "https://changeyourname.mn/form-generator",
+        "applicationCategory": "LegalService",
+        "operatingSystem": "All",
+        "author": {
+          "@type": "Person",
+          "name": "Emma Zimbinski",
+          "url": "https://zimbin.ski"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "changeyourname.mn"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
         }
       }
-        </script>
-  <script type="module" crossorigin src="/assets/index-BPSv7zhy.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CvS3d4eT.css">
-</head>
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block&icon_names=arrow_back,badge,contact_mail,description,download,fact_check,gavel,help,person,security,send,signature,wc"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <script type="module" crossorigin src="/assets/index-D7xpuJe-.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BQDv2h2J.css">
+  </head>
 
-<body class="loading">
+  <body class="loading">
     <div class="loader"></div>
     <div class="bg-img"></div>
     <!-- Top App Bar -->
     <div class="app-bar">
-        <div class="app-bar-content">
-            <div class="app-bar-section">
-                <a href="https://changeyourname.mn" class="back-button" aria-label="Return to main guide">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                </a>
-                <div class="headline-container">
-                    <h1 class="headline">Trans Name Change Court Form Generator</a></h1>
-                    <p>
-                        Unofficial and not affiliated with the government in any way. Double-check with
-                        <a href="https://mncourts.gov/help-topics/name-change" target="_blank">official resources</a>
-                    </p>
-                </div>
-
-            </div>
+      <div class="app-bar-content">
+        <div class="app-bar-section">
+          <a href="https://changeyourname.mn" class="back-button" aria-label="Return to main guide">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </a>
+          <div class="headline-container">
+            <h1 class="headline">Trans Name Change Court Form Generator</h1>
+            <p>
+              Unofficial and not affiliated with the government in any way. Double-check with
+              <a href="https://mncourts.gov/help-topics/name-change" target="_blank">official resources</a>
+            </p>
+          </div>
         </div>
+      </div>
     </div>
     <div class="container">
-        <!-- Header Card -->
-        <div class="card header-card">
-            <img src="banner.webp" height="100" alt="Name Change Form Generator">
-            <h1>Trans Name Change Court Document Generator</h1>
-            <!-- <h2>"Deadname Deleter"</h2> -->
-            <p class="body-text">
-                Easily prefill and download the required legal forms for your name and gender marker change in
-                Minnesota, including forms NAM102, NAM103, and NAM107. Just fill out your information once and it will
-                be applied to all three forms.
-                <br>
-                <br>
-                This form makes a number of assumptions in order to "just work" for
-                the most amount of people. Please see the full list of assumptions this form generator will make on the
-                <a href="https://changeyourname.mn#introduction">main page</a>
-                .
-            <div class="sub-card sub-card--warning">
-                <p>
-                    <strong>Important Disclaimer:</strong>
-                    You are responsible for checking the validity of the
-                    information in these forms prior to submitting to the courts.
-                    <b>I am not a lawyer, and the software I wrote definitely isn't one either.</b>
-                    This form generator is not affiliated with any government or advocacy organization. You will
-                    need to submit these forms to
-                    <a href="https://mncourts.gov/help-topics/name-change" target="_blank">the government</a>
-                    in order to apply for a name change. This website is a tool to help you fill out the forms, but it
-                    is not a substitute for legal advice or official resources. Always double-check your forms and
-                    consult with a lawyer if you have any questions or concerns.
-                </p>
+      <!-- Header Card -->
 
-            </div>
-            </p>
-            <div class="sub-card sub-card--info">
-                <p>
-                    <strong>Security Notice:</strong>
-                    Everything runs locally in your browser, meaning your data doesn't get sent anywhere. This app is
-                    <a href="https://github.com/officiallyemma/form-generator.changeyourname.mn" target="_blank"
-                        rel="noopener">open source</a> and you're welcome to review or audit the code yourself.
-                </p>
-            </div>
-        </div>
-        <div id="materialForm">
-
-        </div>
+      <div id="materialForm"></div>
     </div>
     <div class="footer card">
-        <!-- <hr> -->
-        <p>
-            <i>
-                <u>
-                    Dedicated to
-                    <b>Sara Millerey González</b>
-                    , whose life and death calls us to justice.
-                </u>
-            </i>
-            🧱
-            <br>
-            I'm not a lawyer, and this isn't legal advice. This guide is based on my own experience and research
-            &mdash;
-            double-check everything with official sources or get legal help from the
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform"
-                target="_blank" rel="noopener">MN Volunteer Lawyer Network</a>
-            if you need it.
-            <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank" rel="noopener">
-                View
-                source on GitHub
-            </a>
-            .
-            <br>
-            <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener">
-                Name Change Form
-                Generator
-            </a>
-            &copy; 2026 by
-            <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
-            is licensed under
-            <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+.</a>
-        </p>
+      <!-- <hr> -->
+      <p>
+        <i>
+          <u>
+            Dedicated to
+            <b>Sara Millerey González</b>
+            , whose life and death calls us to justice.
+          </u>
+        </i>
+        🧱
+        <br />
+        I'm not a lawyer, and this isn't legal advice. This guide is based on my own experience and research &mdash; double-check everything with official sources or get legal help from the
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform" target="_blank" rel="noopener">MN Volunteer Lawyer Network</a>
+        if you need it.
+        <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank" rel="noopener"> View source on GitHub </a>
+        .
+        <br />
+        <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener"> Name Change Form Generator </a>
+        &copy; 2026 by
+        <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
+        is licensed under
+        <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+.</a>
+      </p>
     </div>
-    </div>
-</body>
-
+    <!-- </div> -->
+  </body>
 </html>
