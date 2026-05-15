@@ -133,9 +133,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                     return;
                 }
 
-                fetch('/increment', { method: 'POST' }).catch(err => {
-                    console.error('Failed to increment counter:', err);
-                });
+                if (!doc.demo) {
+                    fetch('/increment', { method: 'POST' }).catch(err => {
+                        console.error('Failed to increment counter:', err);
+                    });
+                }
 
                 // Serialize the PDFDocument to bytes (a Uint8Array)
                 const pdfBytes = await pdfDoc.save();

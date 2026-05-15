@@ -5,6 +5,7 @@ export interface FormGeneratorConfig {
     version: string;
     form: (FormSectionConfig | CommentConfig)[]
     documents: DocumentConfig[];
+    demo?: boolean;
     onload?: () => void;
     onGenerate?: (form: PDFDocument) => void;
 }

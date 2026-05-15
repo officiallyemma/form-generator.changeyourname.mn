@@ -30,6 +30,7 @@ function formatDate(date) {
 
 let Config: FormGeneratorConfig = {
     name: "co-form-generator",
+    demo: true,
     version: "0.0.0",
     form: [
         {
