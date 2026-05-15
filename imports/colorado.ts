@@ -85,13 +85,7 @@ let Config: FormGeneratorConfig = {
                     label: "Date of Birth",
                     type: "date",
                     supportingText: "",
-                },
-                {
-                    id: "race",
-                    label: "Race",
-                    supportingText: "Race for NAM103",
-                    type: "text",
-                },
+                }
             ],
         },
         {
@@ -115,34 +109,6 @@ let Config: FormGeneratorConfig = {
                     label: "New Last Name",
                     supportingText: "Your chosen last name",
                     type: "text",
-                },
-            ],
-        },
-        {
-            headerText: "3. Sex/Gender Information",
-            headerIcon: "wc",
-            fields: [
-                {
-                    id: "sexOnBirthRecords",
-                    label: "Assigned Sex at Birth",
-                    supportingText: "Your sex as it appears on your birth certificate now",
-                    type: "select",
-                    options: [
-                        { value: "female", label: "Female" },
-                        { value: "male", label: "Male" },
-                        { value: "NA", label: "Not Listed" },
-                    ],
-                },
-                {
-                    id: "newSex",
-                    label: "Amended Sex on Birth Records",
-                    supportingText: "Your sex as you want it on your birth certificate",
-                    type: "select",
-                    options: [
-                        { value: "female", label: "Female" },
-                        { value: "male", label: "Male" },
-                        { value: "X", label: "X" },
-                    ],
                 },
             ],
         },
@@ -226,7 +192,7 @@ let Config: FormGeneratorConfig = {
         {
             path: "/",
             name: "ColoradoTest.pdf",
-            btnText: "xxxxx",
+            btnText: "Download SAMPLE PDF FOR DEMO PURPOSES ONLY",
             btnIcon: "description",
             inputFields: [
                 "currentFirstName",
