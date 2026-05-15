@@ -1,8 +1,11 @@
 
 import { PDFDocument } from 'pdf-lib';
+// import.meta.glob('./plugins/**/*.js')
 
 async function load() {
-    return await import(/* @vite-ignore */`./${window.location.pathname.split('/').slice(-1)[0] || 'Minnesota'}.ts`)
+
+    let path = window.location.pathname.split('/').slice(-1)[0] || 'minnesota'
+    return await import(`./imports/${path}.ts`)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {

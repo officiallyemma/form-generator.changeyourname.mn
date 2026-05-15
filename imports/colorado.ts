@@ -1,5 +1,5 @@
 import { PDFDocument, PDFForm, rgb, degrees } from "pdf-lib";
-import type { FormGeneratorConfig } from "./Config"
+import type { FormGeneratorConfig } from "../Config"
 import { count } from "node:console";
 
 function formatDate(date) {

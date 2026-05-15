@@ -1,10 +1,9 @@
-import express from 'express';
-import fs from 'fs';
-import path from 'path';
+import * as express from 'express';
+import * as fs from 'fs';
+import * as path from 'path';
 
 let counter = -1;
 const COUNTER_FILE = path.resolve(process.env.HOME ?? '.' + '/.local/share/form-generator', 'counter.txt');
-
 
 function saveCounter() {
     try {
@@ -39,6 +38,13 @@ try {
 
 // serve counter at /counter endpoint and /increment to incremement with ratelimit
 const app = express();
+
+app.use(express.static(path.resolve(process.cwd(), 'dist')));
+
+app.use((req, res) => {
+    res.sendFile(path.join(path.resolve(process.cwd(), 'dist'), 'index.html'))
+})
+
 
 app.get('/counter', (req, res) => {
     res.send(String(counter));

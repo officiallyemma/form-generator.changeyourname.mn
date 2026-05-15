@@ -1,5 +1,5 @@
 import { PDFDocument, PDFForm } from "pdf-lib";
-import type { FormGeneratorConfig } from "./Config"
+import type { FormGeneratorConfig } from "../Config"
 
 function formatDate(date) {
     // turn "YYYY-MM-DD" into "MM-DD-YYYY"
@@ -445,12 +445,12 @@ let Config: FormGeneratorConfig = {
             }),
         );
     },
-    onGenerate: (form: PDFForm) => {
-        form.getFields().forEach((field) => {
-            if (field.constructor.name === "PDFCheckBox") {
-                field.enableReadOnly();
-            }
-        });
+    onGenerate: (doc: PDFDocument) => {
+        // form.getFields().forEach((field) => {
+        //     if (field.constructor.name === "PDFCheckBox") {
+        //         field.enableReadOnly();
+        //     }
+        // });
     },
 };
 

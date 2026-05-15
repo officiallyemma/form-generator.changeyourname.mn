@@ -3,7 +3,6 @@
   "version": "2.0.0",
   "description": "Automatically generate PDF's from user input, using a manifest file to define the fields and their mapping to the PDF. Originally built for changeyourname.mn, but can be used for any similar use case.",
   "main": "FormGenerator.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node FormGenerator.js"
