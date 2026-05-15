@@ -1,4 +1,4 @@
-import{d as i,r as s}from"./index-D1VRIZ8G.js";function r(e){if(typeof e=="string"){var n=e.split("-");return n.length===3?[n[1],n[2],n[0]].join("-"):e}var t=new Date(e),o=""+(t.getMonth()+1),a=""+t.getDate(),l=t.getFullYear();return o.length<2&&(o="0"+o),a.length<2&&(a="0"+a),[o,a,l].join("-")}let d={name:"co-form-generator",demo:!0,version:"0.0.0",form:[{type:"comment",html:`
+import{d as i,r as s}from"./index-CzsrHYJ1.js";function r(e){if(typeof e=="string"){var n=e.split("-");return n.length===3?[n[1],n[2],n[0]].join("-"):e}var t=new Date(e),o=""+(t.getMonth()+1),a=""+t.getDate(),l=t.getFullYear();return o.length<2&&(o="0"+o),a.length<2&&(a="0"+a),[o,a,l].join("-")}let d={name:"co-form-generator",demo:!0,version:"0.0.0",form:[{type:"comment",html:`
             <div class="card header-card">
             <img src="banner.webp" height="100" alt="Name Change Form Generator" />
             <h1>Colorado Trans Name Change Court Document Generator</h1>

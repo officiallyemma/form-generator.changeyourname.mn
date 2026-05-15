@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     return;
                 }
 
-                if (!doc.demo) {
+                if (!Config.demo) {
                     fetch('/increment', { method: 'POST' }).catch(err => {
                         console.error('Failed to increment counter:', err);
                     });
