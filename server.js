@@ -40,10 +40,6 @@ catch (err) {
 }
 // serve counter at /counter endpoint and /increment to incremement with ratelimit
 var app = express();
-app.use(express.static(path.resolve(process.cwd(), 'dist')));
-app.use(function (req, res) {
-    res.sendFile(path.join(path.resolve(process.cwd(), 'dist'), 'index.html'));
-});
 app.get('/counter', function (req, res) {
     res.send(String(counter));
 });
@@ -51,6 +47,10 @@ app.post('/increment', function (req, res) {
     counter++;
     saveCounter();
     res.send(String(counter));
+});
+app.use(express.static(path.resolve(process.cwd(), 'dist')));
+app.use(function (req, res) {
+    res.sendFile(path.join(path.resolve(process.cwd(), 'dist'), 'index.html'));
 });
 var PORT = process.env.PORT || 4747;
 app.listen(PORT, function () {
