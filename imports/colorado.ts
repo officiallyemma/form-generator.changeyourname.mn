@@ -167,6 +167,29 @@ let Config: FormGeneratorConfig = {
         {
             type: "comment",
             html: `
+                
+                    <div class="card sub-card sub-card--info">
+                        <h2>Blah Blah Blah explanation of why the court asks for a reason. what the "default" reason is "im trans and need a name that's fitting and proper" and that this allows you to add a reason</h2>
+                        <p>
+                        </p>
+                    </div>
+                    `
+        },
+        {
+            headerText: "5. (Optional) Short Narrative Statement",
+            headerIcon: "contact_mail",
+            fields: [
+                {
+                    id: "narrative",
+                    label: "Name Change Reason",
+                    supportingText: "Why are you changing your name? (0-2 sentences is sufficient)",
+                    type: "text",
+                }
+            ]
+        },
+        {
+            type: "comment",
+            html: `
 
                 <div class="card">
                     <div class="sub-card sub-card--warning">

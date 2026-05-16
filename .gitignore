@@ -2,3 +2,4 @@ node_modules
 ecosystem.config.js
 .env
 debug.log
+*.odg#
