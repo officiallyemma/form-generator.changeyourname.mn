@@ -416,6 +416,7 @@ let Config: FormGeneratorConfig = {
         },
     ],
     onload: () => {
+        (document.querySelector('#state') as HTMLInputElement).value = "Minnesota";
         document.querySelectorAll("#sexOnBirthRecords, #newSex").forEach((el: HTMLInputElement) =>
             el.addEventListener("change", (e) => {
                 const sexOnBirthRecords = document.getElementById("sexOnBirthRecords") as HTMLInputElement;

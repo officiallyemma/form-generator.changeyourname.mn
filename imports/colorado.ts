@@ -40,12 +40,7 @@ let Config: FormGeneratorConfig = {
             <img src="banner.webp" height="100" alt="Name Change Form Generator" />
             <h1>Colorado Trans Name Change Court Document Generator</h1>
             <p class="body-text">
-               Copy Goes Here
-                <br />
-                <br />
-                This form makes a number of assumptions in order to "just work" for the most amount of people. Please see the full list of assumptions this form generator will make on the
-                <a href="https://changeyourname.mn#introduction">main page</a>
-                .
+                Copy Goes Here
             </p>
 
 
@@ -147,7 +142,7 @@ let Config: FormGeneratorConfig = {
                 {
                     id: "county",
                     label: "County",
-                    supportingText: "e.g. Hennepin, Ramsey, Dakota",
+                    supportingText: "e.g. El Paso, Denver, Arapahoe County",
                     type: "text",
                 },
                 {
@@ -169,7 +164,7 @@ let Config: FormGeneratorConfig = {
             html: `
                 
                     <div class="card sub-card sub-card--info">
-                        <h2>Blah Blah Blah explanation of why the court asks for a reason. what the "default" reason is "im trans and need a name that's fitting and proper" and that this allows you to add a reason</h2>
+                        <h2>Blah Blah Blah explanation of why the court asks for a reason. "im trans and need a name that's fitting and proper" and that this allows you to add a reason</h2>
                         <p>
                         </p>
                     </div>
@@ -177,12 +172,12 @@ let Config: FormGeneratorConfig = {
         },
         {
             headerText: "5. (Optional) Short Narrative Statement",
-            headerIcon: "contact_mail",
+            headerIcon: "text_snippet",
             fields: [
                 {
                     id: "narrative",
                     label: "Name Change Reason",
-                    supportingText: "Why are you changing your name? (0-2 sentences is sufficient)",
+                    supportingText: "Why are you changing your name? (1-2 sentences is sufficient)",
                     type: "text",
                 }
             ]
@@ -289,52 +284,22 @@ let Config: FormGeneratorConfig = {
                     county_5: data.county,
                     dob_1: formatDate(data.dateOfBirth),
                     dob_2: formatDate(data.dateOfBirth),
-                    narrative: data.narrative
+                    narrative: data.narrative,
+                    address: data.address,
+                    city: data.city,
+                    state: data.state,
                 };
             },
         }
     ],
     onload: () => {
-        document.querySelectorAll("#sexOnBirthRecords, #newSex").forEach((el: HTMLInputElement) =>
-            el.addEventListener("change", (e) => {
-                const sexOnBirthRecords = document.getElementById("sexOnBirthRecords") as HTMLInputElement;
-                const newSex = document.getElementById("newSex") as HTMLInputElement;
-
-                if (sexOnBirthRecords.value === "NA") {
-                    alert(
-                        "You are seen, however unfortunately, I simply do not know how to generate the correct forms for intersex people. You should should reach out to the Volunteer Lawyers Network for guidance.",
-                    );
-                    sexOnBirthRecords.value = "";
-                }
-
-                if (newSex.value === "X") {
-                    alert(
-                        "Changing your gender marker to X is a risk-benefit type decision that you should make with the help of an attorney. You can self designate X on an ID, but again this has far reaching implications that I don't have the expertise to advise on. You should should reach out to the Volunteer Lawyers Network for guidance.",
-                    );
-                    newSex.value = "";
-                }
-
-                if (sexOnBirthRecords.value === newSex.value && sexOnBirthRecords.value !== "") {
-                    alert(
-                        "This form generator is designed for trans people changing their name AND gender. If you are looking to NOT change your gender, this form may not be the best fit for you. At the bare minimum you will require manually editing the generated PDFs.",
-                    );
-                    sexOnBirthRecords.value = "";
-                    newSex.value = "";
-                }
-            }),
-        );
+        (document.querySelector('#state') as HTMLInputElement).value = "Colorado";
+        (document.querySelector('#narrative') as HTMLInputElement).value = "I am transgender and need a name that is fitting and proper.";
     },
     onGenerate: (pdf: PDFDocument) => {
-
-
-        // Get the first page of the document
         const pages = pdf.getPages()
         pages.forEach(page => {
-
-            // Get the width and height of the first page
             const { width, height } = page.getSize()
-
-            // Draw a string of text diagonally across the first page
             page.drawText('DEMO DEMO DEMO DEMO DEMO', {
                 x: 5,
                 y: height / 2 + 300,

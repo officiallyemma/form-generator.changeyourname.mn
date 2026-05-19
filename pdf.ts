@@ -3,12 +3,21 @@ import { PDFDocument } from 'pdf-lib';
 // import.meta.glob('./plugins/**/*.js')
 
 async function load() {
-
     let path = window.location.pathname.split('/').slice(-1)[0] || 'minnesota'
     return await import(`./imports/${path}.ts`)
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // ACCESSIBILITY WIDGET
+    const accessibilityButton = document.querySelector('#accessibility') as HTMLElement;
+    if (accessibilityButton) {
+        accessibilityButton.addEventListener('click', (): void => {
+            (document.querySelector('.asw-widget a') as HTMLElement)?.click();
+            (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
+            (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
+        });
+    }
+
     let Config = (await load()).default;
     document.fonts.ready.then(async () => {
         // wait for md custom elements to be defined before we render form elements
@@ -68,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="section-content">
                     <div class="sub-card sub-card--highlight">
                         <p>
-                            Click each button below to sign and download your completed forms.
+                            Click ${Config.documents.length > 1 ? "each button" : "the button"} below to sign and download your completed forms.
                             Make sure all information above is correct before proceeding.
                         </p>
                     </div>

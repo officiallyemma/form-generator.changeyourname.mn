@@ -61,7 +61,7 @@
 
 @font-face {
     font-family: 'Atkinson Hyperlegible Soft';
-    src: url('public/AtkinsonHyperlegibleSoft-Regular.ttf');
+    src: url('/AtkinsonHyperlegibleSoft-Regular.ttf');
 }
 
 :root, body{
