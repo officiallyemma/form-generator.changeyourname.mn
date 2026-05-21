@@ -35,26 +35,48 @@ let Config: FormGeneratorConfig = {
             type: "comment",
             html: `
             <div class="card header-card">
-            <img src="banner.webp" height="100" alt="Name Change Form Generator" />
-            <h1>Minnesota Trans Name Change Court Document Generator</h1>
-            <p class="body-text">
-                Easily prefill and download the required legal forms for your name and gender marker change in Minnesota, including forms NAM102, NAM103, and NAM107. Just fill out your information once and it
-                will be applied to all three forms.
-                <br />
-                <br />
-                This form makes a number of assumptions in order to "just work" for the most amount of people. Please see the full list of assumptions this form generator will make on the
-                <a href="https://changeyourname.mn#introduction">main page</a>
-                .
-            </p>
-
-
-            <div class="sub-card sub-card--info">
-                <p>
-                <strong>Security Notice:</strong>
-                Everything runs locally in your browser, meaning your data doesn't get sent anywhere. This app is
-                <a href="https://github.com/officiallyemma/form-generator.changeyourname.mn" target="_blank" rel="noopener">open source</a> and you're welcome to review or audit the code yourself.
+                <img src="banner.webp" height="100" alt="Name Change Form Generator" />
+                <h1>Minnesota Trans Name Change Court Document Generator</h1>
+                <p class="body-text">
+                    Easily prefill and download the required legal forms for your name and gender marker change in Minnesota, including forms NAM102, NAM103, and NAM107. Just fill out your information once and it
+                    will be applied to all three forms.
+                    <br />
+                    <br />
+                    This form makes a number of assumptions in order to "just work" for the most amount of people. Please see the full list of assumptions this form generator will make on the
+                    <a href="https://changeyourname.mn#introduction">main page</a>
+                    .
                 </p>
-            </div>
+
+                <div class="sub-card sub-card--info">
+                    <p>
+                    <strong>Security Notice:</strong>
+                    Everything runs locally in your browser, meaning your data doesn't get sent anywhere. This app is
+                    <a href="https://github.com/officiallyemma/form-generator.changeyourname.mn" target="_blank" rel="noopener">open source</a>.
+                    </p>
+                </div>
+
+                <div class="sub-card sub-card--info">
+                    <p>
+                    <strong>Prefer to fill out the forms manually?</strong>
+                    Try out these interactive PDFs (doesn't work on iOS)
+                    See the <a href="https://changeyourname.mn/#prepare-forms" target="_blank">instructions on the main page</a> for guidance in how to fill these out. 
+
+                    <br><br>
+                    <md-outlined-button onclick="window.open('/NAM102_Application_for_Name_Change.pdf', '_blank')">
+                      <span class="material-symbols-outlined" slot="icon">download</span>
+                      Download NAM102
+                    </md-outlined-button>
+                    <md-outlined-button onclick="window.open('/NAM103_Criminal_History_Check_Release.pdf', '_blank')">
+                      <span class="material-symbols-outlined" slot="icon">download</span>
+                      Download NAM103
+                    </md-outlined-button>
+                    <md-outlined-button onclick="window.open('/NAM107_Proposed_Order_Granting_Name_Change.pdf', '_blank')">
+                      <span class="material-symbols-outlined" slot="icon">download</span>
+                      Download NAM107
+                    </md-outlined-button>
+
+                    <p>Otherwise, continue to the form below to generate pre-filled PDFs that you can sign and submit to the court.</p>
+
             </div>
 `,
         },
@@ -233,6 +255,37 @@ let Config: FormGeneratorConfig = {
                 },
             ],
         },
+        {
+            type: 'footer',
+            html: `<div class="footer card">
+        <!-- <hr> -->
+        <p>
+          <i>
+            <u>
+              Dedicated to
+              <b>Sara Millerey González</b>
+              , whose life and death calls us to justice.
+            </u>
+          </i>
+          🧱
+          <br />
+          I'm not a lawyer, and this isn't legal advice. This guide is based on my own experience and research &mdash; double-check everything with
+          official sources or get legal help from the
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe63PCfgMQcY5ZdZBdS4jjJTWzXlIk_dw0N2Dd7N4X0RXFpEA/viewform" target="_blank" rel="noopener"
+            >MN Volunteer Lawyer Network</a
+          >
+          if you need it.
+          <a href="https://github.com/qwazwsx/form-generator.changeyourname.mn" target="_blank" rel="noopener"> View source on GitHub </a>
+          .
+          <br />
+          <a href="https://form-generator.changeyourname.mn/" target="_blank" rel="noopener"> Name Change Form Generator </a>
+          &copy; 2026 by
+          <a href="https://zimbin.ski" target="_blank" rel="noopener">Emma Zimbinski</a>
+          is licensed under
+          <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL 3.0+.</a>
+        </p>
+      </div>`
+        }
     ],
     documents: [
         {

@@ -3,11 +3,16 @@ import { PDFDocument, PDFForm } from "pdf-lib";
 export interface FormGeneratorConfig {
     name: string;
     version: string;
-    form: (FormSectionConfig | CommentConfig)[]
+    form: (FormSectionConfig | CommentConfig | FooterConfig)[]
     documents: DocumentConfig[];
     demo?: boolean;
     onload?: () => void;
     onGenerate?: (form: PDFDocument) => void;
+}
+
+export interface FooterConfig {
+    type: 'footer';
+    html: string;
 }
 
 export interface CommentConfig {

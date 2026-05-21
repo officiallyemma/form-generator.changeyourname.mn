@@ -114,13 +114,14 @@ body {
 
 /* App bar styles */
 .app-bar {
-    background-color: var(--md-sys-color-surface);
-    padding: 16px;
+    background-color:  rgb(255 255 255 / 70%);
+    padding: 16px 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
-    width: 100%;
     top: 0;
+    width: 100%;
     z-index: 100;
+        backdrop-filter: blur(5px);
 }
 
 .app-bar-content {
@@ -129,6 +130,7 @@ body {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
+    
 }
 
 .app-bar-section {
@@ -382,7 +384,7 @@ a:hover {
     }
 
     .app-bar {
-        padding: 12px 16px;
+        padding: 12px 0px;
     }
 
     .headline {

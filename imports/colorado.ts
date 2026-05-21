@@ -37,20 +37,35 @@ let Config: FormGeneratorConfig = {
             type: "comment",
             html: `
             <div class="card header-card">
-            <img src="banner.webp" height="100" alt="Name Change Form Generator" />
-            <h1>Colorado Trans Name Change Court Document Generator</h1>
-            <p class="body-text">
-                Copy Goes Here
-            </p>
-
-
-            <div class="sub-card sub-card--info">
-                <p>
-                <strong>Security Notice:</strong>
-                Everything runs locally in your browser, meaning your data doesn't get sent anywhere. This app is
-                <a href="https://github.com/officiallyemma/form-generator.changeyourname.mn" target="_blank" rel="noopener">open source</a> and you're welcome to review or audit the code yourself.
+                <img src="banner.webp" height="100" alt="Name Change Form Generator" />
+                <h1>Colorado Trans Name Change Court Document Generator</h1>
+                <p class="body-text">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
                 </p>
-            </div>
+
+
+                <div class="sub-card sub-card--info" style="padding: 10px;">
+                    <p>
+                    <strong>Security Notice:</strong>
+                    Everything runs locally in your browser, meaning your data doesn't get sent anywhere. This app is
+                    <a href="https://github.com/officiallyemma/form-generator.changeyourname.mn" target="_blank" rel="noopener">open source</a>.
+                    </p>
+                </div>
+
+                <div class="sub-card sub-card--info">
+                    <p>
+                    <strong>Prefer to fill out the forms manually?</strong>
+                    Try out these interactive PDFs (doesn't work on iOS)
+                    <br><br>
+                    <md-outlined-button onclick="window.open('/ColoradoTest.pdf', '_blank')">
+                        <span class="material-symbols-outlined" slot="icon">download</span>
+                        Download Interactive Packet
+                    </md-outlined-button>
+                    </p>
+
+                    <p>Otherwise, continue to the form below to generate pre-filled PDFs that you can sign and submit to the court.</p>
+
+                </div>
             </div>
 `,
         },
@@ -192,10 +207,6 @@ let Config: FormGeneratorConfig = {
                         <p>
                             <strong>Important Disclaimer:</strong>
                             <u>You</u> are responsible for checking the validity of the information in these forms prior to submitting to the courts.
-                            <b>I am not a lawyer, and the software I wrote definitely isn't one either.</b>
-                            This website is just a tool to help you fill out and download the forms, and is not a substitute for legal advice or official resources. 
-                            You will need to submit these forms to the government in order to apply for a name change.
-                            This tool offers no guarantees that any generated form is accurate, fit for any purpose, or will be accepted by the court.
                             Always double-check your forms and consult with a lawyer if you have any questions or concerns.
                         </p>
                         <p>
