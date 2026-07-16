@@ -1,7 +1,7 @@
 import { PDFDocument, PDFForm } from "pdf-lib";
 import type { FormGeneratorConfig } from "../Config"
 
-function formatDate(date) {
+function formatDate(date: string) {
     // turn "YYYY-MM-DD" into "MM-DD-YYYY"
     if (typeof date === 'string') {
         var parts = date.split('-');
@@ -58,24 +58,21 @@ let Config: FormGeneratorConfig = {
                 <div class="sub-card sub-card--info">
                     <p>
                     <strong>Prefer to fill out the forms manually?</strong>
-                    Try out these interactive PDFs (doesn't work on iOS)
-                    See the <a href="https://changeyourname.mn/#prepare-forms" target="_blank">instructions on the main page</a> for guidance in how to fill these out. 
-
                     <br><br>
                     <md-outlined-button onclick="window.open('/NAM102_Application_for_Name_Change.pdf', '_blank')">
                       <span class="material-symbols-outlined" slot="icon">download</span>
-                      Download NAM102
+                      Download Interactive NAM102 PDF
                     </md-outlined-button>
                     <md-outlined-button onclick="window.open('/NAM103_Criminal_History_Check_Release.pdf', '_blank')">
                       <span class="material-symbols-outlined" slot="icon">download</span>
-                      Download NAM103
+                      Download Interactive NAM103 PDF
                     </md-outlined-button>
                     <md-outlined-button onclick="window.open('/NAM107_Proposed_Order_Granting_Name_Change.pdf', '_blank')">
                       <span class="material-symbols-outlined" slot="icon">download</span>
-                      Download NAM107
+                      Download Interactive NAM107 PDF
                     </md-outlined-button>
 
-                    <p>Otherwise, continue to the form below to generate pre-filled PDFs that you can sign and submit to the court.</p>
+                    <p>Otherwise, continue to the automatic form generator below:</p>
 
             </div>
 `,
@@ -470,8 +467,8 @@ let Config: FormGeneratorConfig = {
     ],
     onload: () => {
         (document.querySelector('#state') as HTMLInputElement).value = "Minnesota";
-        document.querySelectorAll("#sexOnBirthRecords, #newSex").forEach((el: HTMLInputElement) =>
-            el.addEventListener("change", (e) => {
+        document.querySelectorAll("#sexOnBirthRecords, #newSex").forEach((el: Element) =>
+            (el as HTMLInputElement).addEventListener("change", (e: Event) => {
                 const sexOnBirthRecords = document.getElementById("sexOnBirthRecords") as HTMLInputElement;
                 const newSex = document.getElementById("newSex") as HTMLInputElement;
 

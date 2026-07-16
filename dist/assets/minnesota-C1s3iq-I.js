@@ -23,24 +23,21 @@ function i(e){if(typeof e=="string"){var r=e.split("-");return r.length===3?[r[1
                 <div class="sub-card sub-card--info">
                     <p>
                     <strong>Prefer to fill out the forms manually?</strong>
-                    Try out these interactive PDFs (doesn't work on iOS)
-                    See the <a href="https://changeyourname.mn/#prepare-forms" target="_blank">instructions on the main page</a> for guidance in how to fill these out. 
-
                     <br><br>
                     <md-outlined-button onclick="window.open('/NAM102_Application_for_Name_Change.pdf', '_blank')">
                       <span class="material-symbols-outlined" slot="icon">download</span>
-                      Download NAM102
+                      Download Interactive NAM102 PDF
                     </md-outlined-button>
                     <md-outlined-button onclick="window.open('/NAM103_Criminal_History_Check_Release.pdf', '_blank')">
                       <span class="material-symbols-outlined" slot="icon">download</span>
-                      Download NAM103
+                      Download Interactive NAM103 PDF
                     </md-outlined-button>
                     <md-outlined-button onclick="window.open('/NAM107_Proposed_Order_Granting_Name_Change.pdf', '_blank')">
                       <span class="material-symbols-outlined" slot="icon">download</span>
-                      Download NAM107
+                      Download Interactive NAM107 PDF
                     </md-outlined-button>
 
-                    <p>Otherwise, continue to the form below to generate pre-filled PDFs that you can sign and submit to the court.</p>
+                    <p>Otherwise, continue to the automatic form generator below:</p>
 
             </div>
 `},{headerText:"1. Current Legal Name",headerIcon:"person",fields:[{id:"currentFirstName",label:"Current Legal First Name",supportingText:"As shown on official documents",type:"text"},{id:"currentMiddleName",label:"Current Legal Middle Name",supportingText:"Leave blank if none",type:"text"},{id:"currentLastName",label:"Current Legal Last Name",supportingText:"As shown on official documents",type:"text"},{id:"dateOfBirth",label:"Date of Birth",type:"date",supportingText:""},{id:"race",label:"Race",supportingText:"Race for NAM103",type:"text"}]},{headerText:"2. New Legal Name",headerIcon:"badge",fields:[{id:"newFirstName",label:"New First Name",supportingText:"Your chosen first name",type:"text"},{id:"newMiddleName",label:"New Middle Name",supportingText:"Leave blank if none",type:"text"},{id:"newLastName",label:"New Last Name",supportingText:"Your chosen last name",type:"text"}]},{headerText:"3. Sex/Gender Information",headerIcon:"wc",fields:[{id:"sexOnBirthRecords",label:"Assigned Sex at Birth",supportingText:"Your sex as it appears on your birth certificate now",type:"select",options:[{value:"female",label:"Female"},{value:"male",label:"Male"},{value:"NA",label:"Not Listed"}]},{id:"newSex",label:"Amended Sex on Birth Records",supportingText:"Your sex as you want it on your birth certificate",type:"select",options:[{value:"female",label:"Female"},{value:"male",label:"Male"},{value:"X",label:"X"}]}]},{headerText:"4. Contact Information",headerIcon:"contact_mail",fields:[{id:"address",label:"Street Address",supportingText:"Include apartment/unit number",type:"text"},{id:"city",label:"City",type:"text",value:"",supportingText:""},{id:"state",label:"State",type:"text",value:"Minnesota",supportingText:""},{id:"zip",label:"ZIP Code",type:"text",value:"",supportingText:""},{id:"county",label:"County",supportingText:"e.g. Hennepin, Ramsey, Dakota",type:"text"},{id:"phone",label:"Phone Number",supportingText:"Include area code",type:"tel"},{id:"email",label:"Email Address",supportingText:"Court will use this for updates",type:"email"}]},{type:"comment",html:`

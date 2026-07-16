@@ -1,8 +1,10 @@
 import { PDFDocument, PDFForm, rgb, degrees } from "pdf-lib";
 import type { FormGeneratorConfig } from "../Config"
-import { count } from "node:console";
+// import { count } from "node:console";
 
-function formatDate(date) {
+const NARRATIVE_DEFAULT = "I am transgender and need a name that is fitting and proper."
+
+function formatDate(date: string) {
     // turn "YYYY-MM-DD" into "MM-DD-YYYY"
     if (typeof date === 'string') {
         var parts = date.split('-');
@@ -55,7 +57,6 @@ let Config: FormGeneratorConfig = {
                 <div class="sub-card sub-card--info">
                     <p>
                     <strong>Prefer to fill out the forms manually?</strong>
-                    Try out these interactive PDFs (doesn't work on iOS)
                     <br><br>
                     <md-outlined-button onclick="window.open('/ColoradoTest.pdf', '_blank')">
                         <span class="material-symbols-outlined" slot="icon">download</span>
@@ -63,7 +64,7 @@ let Config: FormGeneratorConfig = {
                     </md-outlined-button>
                     </p>
 
-                    <p>Otherwise, continue to the form below to generate pre-filled PDFs that you can sign and submit to the court.</p>
+                    <p>Otherwise, continue to the automatic form generator below:</p>
 
                 </div>
             </div>
@@ -289,13 +290,13 @@ let Config: FormGeneratorConfig = {
                     new_full_name_7: new_full_name,
                     new_full_name_8: new_full_name,
                     county_1: data.county,
-                    county_2: data.county,
+                    county_2: data.county.toLowerCase().endsWith('county') ? data.county : data.county + ' County',
                     county_3: data.county,
                     county_4: data.county,
                     county_5: data.county,
                     dob_1: formatDate(data.dateOfBirth),
                     dob_2: formatDate(data.dateOfBirth),
-                    narrative: data.narrative,
+                    narrative: data.narrative === NARRATIVE_DEFAULT ? '' : data.narrative,
                     address: data.address,
                     city: data.city,
                     state: data.state,
@@ -305,7 +306,7 @@ let Config: FormGeneratorConfig = {
     ],
     onload: () => {
         (document.querySelector('#state') as HTMLInputElement).value = "Colorado";
-        (document.querySelector('#narrative') as HTMLInputElement).value = "I am transgender and need a name that is fitting and proper.";
+        (document.querySelector('#narrative') as HTMLInputElement).value = NARRATIVE_DEFAULT;
     },
     onGenerate: (pdf: PDFDocument) => {
         const pages = pdf.getPages()
