@@ -289,6 +289,9 @@ let Config: FormGeneratorConfig = {
                     new_full_name_6: new_full_name,
                     new_full_name_7: new_full_name,
                     new_full_name_8: new_full_name,
+                    new_full_name_9: new_full_name,
+                    new_full_name_10: new_full_name,
+
                     county_1: data.county,
                     county_2: data.county.toLowerCase().endsWith('county') ? data.county : data.county + ' County',
                     county_3: data.county,
