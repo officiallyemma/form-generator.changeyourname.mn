@@ -161,18 +161,18 @@ let Config: FormGeneratorConfig = {
                     supportingText: "e.g. El Paso, Denver, Arapahoe County",
                     type: "text",
                 },
-                {
-                    id: "phone",
-                    label: "Phone Number",
-                    supportingText: "Include area code",
-                    type: "tel",
-                },
-                {
-                    id: "email",
-                    label: "Email Address",
-                    supportingText: "Court will use this for updates",
-                    type: "email",
-                },
+                // {
+                //     id: "phone",
+                //     label: "Phone Number",
+                //     supportingText: "Include area code",
+                //     type: "tel",
+                // },
+                // {
+                //     id: "email",
+                //     label: "Email Address",
+                //     supportingText: "Court will use this for updates",
+                //     type: "email",
+                // },
             ],
         },
         {
@@ -238,8 +238,8 @@ let Config: FormGeneratorConfig = {
                 "newFirstName",
                 "newMiddleName",
                 "newLastName",
-                "phone",
-                "email",
+                // "phone",
+                // "email",
             ],
             pdfFields: {
                 old_full_name_1: "text",
