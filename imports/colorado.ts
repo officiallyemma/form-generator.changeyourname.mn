@@ -161,18 +161,18 @@ let Config: FormGeneratorConfig = {
                     supportingText: "e.g. El Paso, Denver, Arapahoe County",
                     type: "text",
                 },
-                // {
-                //     id: "phone",
-                //     label: "Phone Number",
-                //     supportingText: "Include area code",
-                //     type: "tel",
-                // },
-                // {
-                //     id: "email",
-                //     label: "Email Address",
-                //     supportingText: "Court will use this for updates",
-                //     type: "email",
-                // },
+                {
+                    id: "phone",
+                    label: "Phone Number",
+                    supportingText: "Include area code",
+                    type: "tel",
+                },
+                {
+                    id: "email",
+                    label: "Email Address",
+                    supportingText: "Court will use this for updates",
+                    type: "email",
+                },
             ],
         },
         {
@@ -238,8 +238,8 @@ let Config: FormGeneratorConfig = {
                 "newFirstName",
                 "newMiddleName",
                 "newLastName",
-                // "phone",
-                // "email",
+                "phone",
+                "email",
             ],
             pdfFields: {
                 old_full_name_1: "text",
@@ -268,6 +268,9 @@ let Config: FormGeneratorConfig = {
                 dob_1: "text",
                 dob_2: "text",
                 narrative: "text",
+
+                address_1: "text",
+                contact_info_1: "text",
             },
             build: (data) => {
                 let old_full_name = `${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName}`;
@@ -301,9 +304,8 @@ let Config: FormGeneratorConfig = {
                     dob_1: formatDate(data.dateOfBirth),
                     dob_2: formatDate(data.dateOfBirth),
                     narrative: data.narrative === NARRATIVE_DEFAULT ? '' : data.narrative,
-                    address: data.address,
-                    city: data.city,
-                    state: data.state,
+                    address_1: `${data.address}, ${data.city}, ${data.state} ${data.zip}`,
+                    contact_info_1: `Phone: ${data.phone} | Email: ${data.email}`
                 };
             },
         }
