@@ -322,6 +322,8 @@ let Config: FormGeneratorConfig = {
     ],
     onload: () => {
         (document.querySelector('#state') as HTMLInputElement).value = "Colorado";
+        (document.querySelector('#state') as HTMLInputElement).disabled = true;
+
         (document.querySelector('#narrative') as HTMLInputElement).value = NARRATIVE_DEFAULT;
         (document.querySelector('.app-bar-section a') as HTMLAnchorElement).href = "https://www.namechangeproject.org/adult-name-change/"
     },

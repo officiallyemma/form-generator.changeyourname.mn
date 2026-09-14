@@ -45,6 +45,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
+            if (section.type === 'footer') {
+                document.querySelector('#container')?.insertAdjacentHTML('beforeend', section.html);
+                return;
+            }
             // render form sections
             let html = `
                 <div class="card guide-section">
@@ -117,10 +121,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
         Config.documents.forEach(doc => {
-            document.getElementById(`submit - ${doc.name}`)?.addEventListener('click', async () => {
+            document.getElementById(`submit-${doc.name}`)?.addEventListener('click', async () => {
                 const data: { [key: string]: any } = {};
 
-                document.querySelectorAll(`#materialForm[serialize]`).forEach((input: Element) => {
+                document.querySelectorAll(`#materialForm [serialize]`).forEach((input: Element) => {
                     data[input.id] = (input as HTMLInputElement).value;
                 });
 
@@ -185,9 +189,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         console.log('onload')
         // call manifest for additional onload behavior
-        setTimeout(() => {
-            // Config?.onload?.();
-        }, 500)
+        // setTimeout(() => {
+        Config?.onload?.();
+        // }, 500)
 
         document.body.classList.remove('loading');
     });
