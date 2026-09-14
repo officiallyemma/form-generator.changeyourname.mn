@@ -64,7 +64,8 @@
     src: url('/AtkinsonHyperlegibleSoft-Regular.ttf');
 }
 
-:root, body{
+:root,
+body {
     --mdc-typography-font-family: 'Atkinson Hyperlegible Soft', 'Roboto', sans-serif;
 }
 
@@ -76,7 +77,7 @@ body {
     padding: 0;
     background: linear-gradient(270deg, #ff8fa3, #f582e5, #c084fc, #5eead4, #86efac, #fef08a);
     background-size: 600% 600%;
-    animation: rainbowFlow 30s ease infinite;
+    animation: rainbowFlow 60s ease infinite;
     color: var(--md-sys-color-on-background);
     /* opacity: 0.05; */
 }
@@ -114,14 +115,14 @@ body {
 
 /* App bar styles */
 .app-bar {
-    background-color:  rgb(255 255 255 / 70%);
+    background-color: rgb(255 255 255 / 70%);
     padding: 16px 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
-        backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 .app-bar-content {
@@ -130,7 +131,7 @@ body {
     justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
-    
+
 }
 
 .app-bar-section {
@@ -474,4 +475,8 @@ a:hover {
 
 a:visited {
     color: var(--md-sys-color-secondary);
+}
+
+.asw-container .asw-widget {
+    display: none;
 }

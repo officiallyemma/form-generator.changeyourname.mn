@@ -1,10 +1,26 @@
 
 import { PDFDocument } from 'pdf-lib';
+import { FormGeneratorConfig } from './Config';
 // import.meta.glob('./plugins/**/*.js')
 
+
 async function load() {
-    let path = window.location.pathname.split('/').slice(-1)[0] || 'minnesota'
-    return await import(`./imports/${path}.ts`)
+    if (window.location.pathname.split('/').length > 3) {
+        alert('Invalid URL. Please check the URL and try again. Defaulting to Minnesota')
+        window.location.href = '/minnesota'
+    }
+
+    if (window.location.pathname.endsWith('/') && window.location.pathname.length > 1) {
+        window.location.href = window.location.pathname.slice(0, -1)
+    }
+
+
+    let path = window.location.pathname.toLowerCase().split('/').slice(-1)[0] || 'minnesota'
+    return await import(`./imports/${path}.ts`).catch(() => {
+        alert(`No configuration found for ${path}. Please check the URL and try again. Defaulting to Minnesota`)
+        window.location.href = '/minnesota'
+
+    })
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -18,14 +34,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    let Config = (await load()).default;
+    let Config: FormGeneratorConfig = (await load()).default;
     document.fonts.ready.then(async () => {
         // wait for md custom elements to be defined before we render form elements
         await customElements.whenDefined('md-outlined-select');
         await customElements.whenDefined('md-outlined-text-field');
-        Config.form.forEach(async section => {
+        Config.form.forEach(section => {
             if (section.type === 'comment') {
-                document.querySelector('#materialForm').insertAdjacentHTML('beforeend', section.html);
+                document.querySelector('#materialForm')?.insertAdjacentHTML('beforeend', section.html);
                 return;
             }
 
@@ -38,20 +54,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
                     <div class="section-content">
                         <div class="form-grid">
-            ${section.fields.map(field => {
+            ${(section.type === 'section') ? section.fields.map(field => {
                 return field.type === 'select' ?
-                    `<md-outlined-select id="${field.id}" label="${field.label}" supporting-text="${field.supportingText}" autocomplete="off" serialize>
+                    `<md-outlined-select type="search" id="${field.id}" label="${field.label}" supporting-text="${field.supportingText}" autocomplete="off" serialize>
                         <md-select-option aria-label="blank"></md-select-option> 
-                            ${field.options.map(option => `<md-select-option value="${option.value}">${option.label}
-                        </md-select-option>`).join('')}
+                            ${(field.options) ? field.options.map(option => `<md-select-option value="${option.value}">${option.label}</md-select-option>`).join('') : ''}
                     </md-outlined-select>`
-                    : `<md-outlined-text-field id="${field.id}" label="${field.label}" type="${field.type}" supporting-text="${field.supportingText}" autocomplete="off" serialize></md-outlined-text-field>`
-            }).join('')}
+                    :
+                    `<md-outlined-text-field id="${field.id}" label="${field.label}" type="${field.type}" supporting-text="${field.supportingText}" autocomplete="off" serialize></md-outlined-text-field>`
+            }).join('') : ''
+                }
                         </div>
-                    </div>
-                </div>  
+        </div>
+        </div>
             `
-            document.querySelector('#materialForm').insertAdjacentHTML('beforeend', html);
+            document.querySelector('#materialForm')?.insertAdjacentHTML('beforeend', html);
         });
 
 
@@ -68,42 +85,43 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // render document buttons
-        document.querySelector('#materialForm').insertAdjacentHTML('beforeend', `
-            <div class="card guide-section">
-                <div class="section-header">
-                    <span class="material-symbols-outlined section-icon">download</span>
-                    <h2>Securely Generate Your Forms</h2>
-                </div>
-                <div class="section-content">
-                    <div class="sub-card sub-card--highlight">
-                        <p>
-                            Click ${Config.documents.length > 1 ? "each button" : "the button"} below to sign and download your completed forms.
+        document.querySelector('#materialForm')?.insertAdjacentHTML('beforeend', `
+        <div class= "card guide-section">
+        <div class="section-header" >
+    <span class="material-symbols-outlined section-icon"> download </span>
+    <h2> Securely Generate Your Forms </h2>
+    </div>
+    <div class= "section-content" >
+    <div class="sub-card sub-card--highlight">
+    <p>
+    Click ${Config.documents.length > 1 ? "each button" : "the button"} below to sign and download your completed forms.
                             Make sure all information above is correct before proceeding.
                         </p>
-                    </div>
-                </div>
-                <div class="button-group">
-            ${Config.documents.map(doc => `
+    </div>
+    </div>
+    <div class= "button-group">
+    ${Config.documents.map(doc => `
                     <md-filled-button class="submit" id="submit-${doc.name}" value="" has-icon="">
                         <span class="material-symbols-outlined" slot="icon">${doc.btnIcon}</span>
                         ${doc.btnText}
                     </md-filled-button>
-            `).join('')}
-                </div>
-                <div class="sub-card counter-card">
-                        <p>${await getCounter()} forms generated since 2025</p>
-                    </div>
+            `).join('')
+            }
+    </div>
+    <div class= "sub-card counter-card">
+    <p>${await getCounter()} forms generated since 2025 </p>
+    </div>
 
-            </div>
+    </div>
         `);
 
 
         Config.documents.forEach(doc => {
-            document.getElementById(`submit-${doc.name}`).addEventListener('click', async () => {
+            document.getElementById(`submit - ${doc.name}`)?.addEventListener('click', async () => {
                 const data: { [key: string]: any } = {};
 
-                document.querySelectorAll(`#materialForm [serialize]`).forEach((input: HTMLInputElement) => {
-                    data[input.id] = input.value;
+                document.querySelectorAll(`#materialForm[serialize]`).forEach((input: Element) => {
+                    data[input.id] = (input as HTMLInputElement).value;
                 });
 
                 let pdfFields = doc.build(data);
@@ -134,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     })
 
                     // pass  object to Config for additional custom PDF manipulation
-                    Config.onGenerate(pdfDoc);
+                    Config?.onGenerate?.(pdfDoc);
 
                 } catch (e) {
                     console.error(`Error filling PDF form: ${e}`);
@@ -151,7 +169,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Serialize the PDFDocument to bytes (a Uint8Array)
                 const pdfBytes = await pdfDoc.save();
 
-                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const blob = new Blob([pdfBytes as unknown as ArrayBuffer], { type: 'application/pdf' });
                 var fileURL = URL.createObjectURL(blob);
                 var a = document.createElement("a");
                 a.href = fileURL;
@@ -164,8 +182,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         })
 
+
+        console.log('onload')
         // call manifest for additional onload behavior
-        Config.onload();
+        setTimeout(() => {
+            // Config?.onload?.();
+        }, 500)
 
         document.body.classList.remove('loading');
     });

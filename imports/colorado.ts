@@ -71,6 +71,7 @@ let Config: FormGeneratorConfig = {
 `,
         },
         {
+            type: "section",
             headerText: "1. Current Legal Name",
             headerIcon: "person",
             fields: [
@@ -101,6 +102,7 @@ let Config: FormGeneratorConfig = {
             ],
         },
         {
+            type: "section",
             headerText: "2. New Legal Name",
             headerIcon: "badge",
             fields: [
@@ -125,6 +127,7 @@ let Config: FormGeneratorConfig = {
             ],
         },
         {
+            type: "section",
             headerText: "4. Contact Information",
             headerIcon: "contact_mail",
             fields: [
@@ -187,6 +190,7 @@ let Config: FormGeneratorConfig = {
                     `
         },
         {
+            type: "section",
             headerText: "5. (Optional) Short Narrative Statement",
             headerIcon: "text_snippet",
             fields: [
@@ -265,6 +269,7 @@ let Config: FormGeneratorConfig = {
                 county_3: "text",
                 county_4: "text",
                 county_5: "text",
+                county_6: "text",
                 dob_1: "text",
                 dob_2: "text",
                 narrative: "text",
@@ -275,6 +280,9 @@ let Config: FormGeneratorConfig = {
             build: (data) => {
                 let old_full_name = `${data.currentFirstName} ${data.currentMiddleName} ${data.currentLastName}`;
                 let new_full_name = `${data.newFirstName} ${data.newMiddleName} ${data.newLastName}`;
+                let countyShort = data.county.toLowerCase().endsWith('county') ? data.county.slice(0, -7) : data.county;
+                let countyLong = data.county.toLowerCase().endsWith('county') ? data.county : data.county + ' County';
+
                 return {
                     old_full_name_1: old_full_name,
                     old_full_name_2: old_full_name,
@@ -296,14 +304,16 @@ let Config: FormGeneratorConfig = {
                     new_full_name_7: new_full_name,
                     new_full_name_8: new_full_name,
 
-                    county_1: data.county,
-                    county_2: data.county.toLowerCase().endsWith('county') ? data.county : data.county + ' County',
-                    county_3: data.county,
-                    county_4: data.county,
-                    county_5: data.county,
+                    county_1: countyShort,
+                    county_2: countyLong,
+                    county_3: countyShort,
+                    county_4: countyShort,
+                    county_5: countyShort,
+                    county_6: countyLong,
+
                     dob_1: formatDate(data.dateOfBirth),
                     dob_2: formatDate(data.dateOfBirth),
-                    narrative: data.narrative === NARRATIVE_DEFAULT ? '' : data.narrative,
+                    narrative: data.narrative,
                     address_1: `${data.address}, ${data.city}, ${data.state} ${data.zip}`,
                     contact_info_1: `Phone: ${data.phone} | Email: ${data.email}`
                 };
@@ -313,6 +323,7 @@ let Config: FormGeneratorConfig = {
     onload: () => {
         (document.querySelector('#state') as HTMLInputElement).value = "Colorado";
         (document.querySelector('#narrative') as HTMLInputElement).value = NARRATIVE_DEFAULT;
+        (document.querySelector('.app-bar-section a') as HTMLAnchorElement).href = "https://www.namechangeproject.org/adult-name-change/"
     },
     onGenerate: (pdf: PDFDocument) => {
         const pages = pdf.getPages()

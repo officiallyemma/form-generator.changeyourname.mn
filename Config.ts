@@ -13,15 +13,19 @@ export interface FormGeneratorConfig {
 export interface FooterConfig {
     type: 'footer';
     html: string;
+    headerText?: string;
+    headerIcon?: string;
 }
 
 export interface CommentConfig {
     type: 'comment';
     html: string;
+    headerText?: string;
+    headerIcon?: string;
 }
 
 export interface FormSectionConfig {
-    type?: 'section'
+    type: 'section';
     headerText: string;
     headerIcon: string;
     fields: Field[];

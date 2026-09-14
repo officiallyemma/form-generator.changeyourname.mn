@@ -1,7 +1,7 @@
 import { PDFDocument, PDFForm } from "pdf-lib";
 import type { FormGeneratorConfig } from "../Config"
 
-function formatDate(date: string) {
+function formatDate(date: string | Date) {
     // turn "YYYY-MM-DD" into "MM-DD-YYYY"
     if (typeof date === 'string') {
         var parts = date.split('-');
@@ -78,6 +78,7 @@ let Config: FormGeneratorConfig = {
 `,
         },
         {
+            type: "section",
             headerText: "1. Current Legal Name",
             headerIcon: "person",
             fields: [
@@ -114,6 +115,7 @@ let Config: FormGeneratorConfig = {
             ],
         },
         {
+            type: "section",
             headerText: "2. New Legal Name",
             headerIcon: "badge",
             fields: [
@@ -138,6 +140,7 @@ let Config: FormGeneratorConfig = {
             ],
         },
         {
+            type: "section",
             headerText: "3. Sex/Gender Information",
             headerIcon: "wc",
             fields: [
@@ -166,6 +169,7 @@ let Config: FormGeneratorConfig = {
             ],
         },
         {
+            type: "section",
             headerText: "4. Contact Information",
             headerIcon: "contact_mail",
             fields: [
@@ -241,6 +245,7 @@ let Config: FormGeneratorConfig = {
         `,
         },
         {
+            type: "section",
             headerText: "5. Legal Signature",
             headerIcon: "signature",
             fields: [
