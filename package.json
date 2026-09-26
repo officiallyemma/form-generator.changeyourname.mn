@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/node": "^24.6.2",
     "typescript": "^5.9.3",
-    "vite": "^7.3.3"
+    "vite": "^7.3.3",
+    "vite-plugin-sri": "^0.0.2"
   }
 }

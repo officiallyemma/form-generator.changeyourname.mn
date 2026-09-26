@@ -1,4 +1,4 @@
-import{d as i,r as s}from"./index-DedIBY4f.js";const u="I am transgender and need a name that is fitting and proper.";function l(e){if(typeof e=="string"){var t=e.split("-");return t.length===3?[t[1],t[2],t[0]].join("-"):e}var n=new Date(e),a=""+(n.getMonth()+1),o=""+n.getDate(),r=n.getFullYear();return a.length<2&&(a="0"+a),o.length<2&&(o="0"+o),[a,o,r].join("-")}let m={name:"co-form-generator",demo:!0,version:"0.0.0",form:[{type:"comment",html:`
+import{d as i,r as s}from"./index-vTFTZP5b.js";const u="I am transgender and need a name that is fitting and proper.";function l(e){if(typeof e=="string"){var t=e.split("-");return t.length===3?[t[1],t[2],t[0]].join("-"):e}var n=new Date(e),a=""+(n.getMonth()+1),o=""+n.getDate(),r=n.getFullYear();return a.length<2&&(a="0"+a),o.length<2&&(o="0"+o),[a,o,r].join("-")}let m={name:"co-form-generator",demo:!0,version:"0.0.0",form:[{type:"comment",html:`
             <div class="card header-card">
                 <img src="banner.webp" height="100" alt="Name Change Form Generator" />
                 <h1>Colorado Trans Name Change Court Document Generator</h1>

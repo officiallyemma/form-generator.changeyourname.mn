@@ -5,32 +5,54 @@ import { FormGeneratorConfig } from './Config';
 
 
 async function load() {
-    if (window.location.pathname.split('/').length > 3) {
-        alert('Invalid URL. Please check the URL and try again. Defaulting to Minnesota')
-        window.location.href = '/minnesota'
-    }
+    // if (window.location.pathname.split('/').length > 3) {
+    //     alert('Invalid URL. Please check the URL and try again. Defaulting to Minnesota')
+    //     window.location.href = '/minnesota'
+    // }
 
-    if (window.location.pathname.endsWith('/') && window.location.pathname.length > 1) {
-        window.location.href = window.location.pathname.slice(0, -1)
-    }
+    // if (window.location.pathname.endsWith('/') && window.location.pathname.length > 1) {
+    //     window.location.href = window.location.pathname.slice(0, -1)
+    // }
 
-
-    let path = window.location.pathname.toLowerCase().split('/').slice(-1)[0] || 'minnesota'
+    let path = (new URLSearchParams(window.location.search)).get("state") ?? 'minnesota';
     return await import(`./imports/${path}.ts`).catch(() => {
-        alert(`No configuration found for ${path}. Please check the URL and try again. Defaulting to Minnesota`)
-        window.location.href = '/minnesota'
+        alert(`No configuration found for ${path}. Please check the URL and try again.`)
+        // window.location.href = '/minnesota'
 
     })
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     // ACCESSIBILITY WIDGET
+    function loadSiennaScript(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            if (document.querySelector('script[src="sienna.min.js"]')) {
+                resolve();
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'sienna.min.js';
+            script.defer = true;
+            script.async = true;
+
+            script.addEventListener('load', () => resolve());
+            script.addEventListener('error', () => reject(new Error('Failed to load script')));
+
+            document.head.appendChild(script);
+        });
+    }
+
     const accessibilityButton = document.querySelector('#accessibility') as HTMLElement;
     if (accessibilityButton) {
         accessibilityButton.addEventListener('click', (): void => {
-            (document.querySelector('.asw-widget a') as HTMLElement)?.click();
-            (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
-            (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
+            loadSiennaScript().then(() => {
+                setTimeout(() => {
+                    (document.querySelector('.asw-widget a') as HTMLElement)?.click();
+                    (document.querySelector('button.asw-btn[data-key="monochrome"]') as HTMLElement)?.click();
+                    (document.querySelector('button.asw-btn[data-key="stop-animations"]') as HTMLElement)?.click();
+                }, 500)
+            });
         });
     }
 
@@ -132,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 // Fetch the PDF with form fields
                 // TODO: do this on page load so user can turn on airplane mode while generating PDFs as a form of security theatre /shrug
-                const formUrl = `${doc.path}${doc.name}`;
+                const formUrl = `./${doc.path}${doc.name}`;
                 const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
 
                 // Load a PDF with form fields
