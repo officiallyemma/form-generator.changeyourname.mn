@@ -23,6 +23,12 @@ async function load() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // hide back btn on embedded pages
+    if (window.self !== window.top) {
+        (document.querySelector('.app-bar-section a.back-button') as HTMLAnchorElement).style.display = 'none';
+    }
+
+
     // ACCESSIBILITY WIDGET
     function loadSiennaScript(): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -202,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 a.download = `${doc.name}`;
                 a.click();
 
-                if (window.innerWidth > 768) {
+                if (window.innerWidth > 768 || window.self !== window.top) {
                     window.open(fileURL, '_blank');
                 }
             });

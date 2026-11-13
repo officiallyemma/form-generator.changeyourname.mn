@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Automatically generate PDF's from user input, using a manifest file to define the fields and their mapping to the PDF. Originally built for changeyourname.mn, but can be used for any similar use case.",
   "main": "FormGenerator.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node FormGenerator.js"
@@ -26,8 +27,11 @@
   },
   "devDependencies": {
     "@types/node": "^24.6.2",
+    "archiver": "^8.0.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.3",
-    "vite-plugin-sri": "^0.0.2"
+    "vite-plugin-singlefile": "^2.3.3",
+    "vite-plugin-sri": "github:JonathanLee-LX/vite-plugin-sri",
+    "vite-plugin-sri-gen": "^1.7.4"
   }
 }

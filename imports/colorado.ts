@@ -32,7 +32,7 @@ function formatDate(date: string) {
 
 let Config: FormGeneratorConfig = {
     name: "co-form-generator",
-    demo: true,
+    demo: false,
     version: "0.0.0",
     form: [
         {
@@ -58,7 +58,7 @@ let Config: FormGeneratorConfig = {
                     <p>
                     <strong>Prefer to fill out the forms manually?</strong>
                     <br><br>
-                    <md-outlined-button onclick="window.open('/ColoradoTest.pdf', '_blank')">
+                    <md-outlined-button class="download-button" data-url="ColoradoTest.pdf">
                         <span class="material-symbols-outlined" slot="icon">download</span>
                         Download Interactive Packet
                     </md-outlined-button>
@@ -326,6 +326,13 @@ let Config: FormGeneratorConfig = {
 
         (document.querySelector('#narrative') as HTMLInputElement).value = NARRATIVE_DEFAULT;
         (document.querySelector('.app-bar-section a') as HTMLAnchorElement).href = "https://www.namechangeproject.org/adult-name-change/"
+
+        document.querySelectorAll('.download-button').forEach(button => {
+            button.addEventListener('click', (event) => {
+                const url = (event.currentTarget as HTMLButtonElement).getAttribute('data-url');
+                if (url) { window.open(url, '_blank'); }
+            });
+        });
     },
     onGenerate: (pdf: PDFDocument) => {
         const pages = pdf.getPages()
